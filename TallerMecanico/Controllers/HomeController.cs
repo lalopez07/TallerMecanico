@@ -13,5 +13,23 @@ namespace TallerMecanico.Controllers
         {
             return View();
         }
+
+
+        public ActionResult Inventario()
+        {
+            return View();
+        }
+        public ActionResult Ordenes()
+        {
+            return View();
+        }
+        public ActionResult Pagos()
+        {
+            return View();
+        }
+
+
+        
     }
 }
+
