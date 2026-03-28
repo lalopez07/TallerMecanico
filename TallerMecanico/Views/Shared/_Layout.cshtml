@@ -4,9 +4,9 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - motorlink — Taller Mrcanico</title>
-    <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
-    <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
-    <script src="~/Scripts/modernizr-2.6.2.js"></script>
+    <link href='@Url.Content("~/Content/Site.css")' rel="stylesheet" type="text/css" />
+    <link href='@Url.Content("~/Content/bootstrap.min.css")' rel="stylesheet" type="text/css" />
+    <script src='@Url.Content("~/Scripts/modernizr-2.6.2.js")'></script>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
 </head>
@@ -16,12 +16,12 @@
         <nav class="navbar">
             <h2 class="logo">motorlink</h2>
             <ul>
-                <li><a href="#">Inicio</a></li>
-                <li><a href="#agendar">Agendar</a></li>
-                <li><a href="#citas">Citas</a></li>
-                <li><a href="#ordenes.html">Órdenes</a></li>
-                <li><a href="#inventario.html">Inventario</a></li>
-                <li><a href="#pagos.html">Pagos</a></li>
+                <li><a href='@Url.Action("Index", "Home")'>Inicio</a></li>
+                <li><a href='@Url.Action("Index", "Home")#agendar'>Agendar</a></li>
+                <li><a href='@Url.Action("Index", "Home")#citas'>Citas</a></li>
+                <li><a href='@Url.Action("Ordenes", "Home")'>Ordenes</a></li>
+                <li><a href='@Url.Action("Inventario", "Home")'>Inventario</a></li>
+                <li><a href='@Url.Action("Pagos", "Home")'>Pagos</a></li>
 
             </ul>
         </nav>
@@ -38,7 +38,7 @@
             <p>&copy; @DateTime.Now.Year - MotorLink Taller Mecanico</p>
         </footer>
     </div>
-    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
-    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src='@Url.Content("~/Scripts/jquery-1.10.2.min.js")'></script>
+    <script src='@Url.Content("~/Scripts/bootstrap.min.js")'></script>
 </body>
 </html>
