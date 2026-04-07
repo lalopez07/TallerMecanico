@@ -1,0 +1,308 @@
+﻿
+@{
+    ViewBag.Title = "Trabajdash";
+}
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard Trabajador - MotorLink</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href='@Url.Content("~/Content/styles.css")' rel="stylesheet" type="text/css" />
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- SIDEBAR -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h2>motorlink</h2>
+            </div>
+            <nav class="sidebar-nav" id="sidebarNav">
+                <a href="#" class="nav-item active" onclick="loadSection('dashboard')">
+                    <span>Dashboard</span>
+                </a>
+                <a href="#" class="nav-item" onclick="loadSection('assignments')">
+                    <span>Mis Asignaciones</span>
+                </a>
+                <a href="#" class="nav-item" onclick="loadSection('orders')">
+                    <span>Órdenes de Trabajo</span>
+                </a>
+                <a href="#" class="nav-item" onclick="loadSection('schedule')">
+                    <span>Horario</span>
+                </a>
+                <a href="#" class="nav-item" onclick="loadSection('inventory')">
+                    <span>Inventario</span>
+                </a>
+                <a href="#" class="nav-item" onclick="loadSection('requests')">
+                    <span>Solicitudes de Materiales</span>
+                </a>
+                <hr>
+                <a href="#" class="nav-item" onclick="loadSection('profile')">
+                    <span>Mi Perfil</span>
+                </a>
+                <a href="login.html" class="nav-item" onclick="handleLogout()">
+                    <span>Cerrar Sesión</span>
+                </a>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+            <!-- TOP NAV -->
+            <header class="top-nav">
+                <div class="search-bar">
+                    <input type="text" placeholder="Buscar orden...">
+                </div>
+                <div class="nav-right">
+                    <button class="icon-btn">🔔</button>
+                    <button class="icon-btn">⚙️</button>
+                    <div class="user-profile">
+                        <img src="https://via.placeholder.com/40" alt="Usuario">
+                        <span id="userName">Trabajador</span>
+                    </div>
+                </div>
+            </header>
+
+            <div class="content-area" id="contentArea">
+                <!-- Dashboard -->
+                <section id="dashboard-section" class="section active">
+                    <h1>Dashboard de Trabajo</h1>
+
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-number" id="ordersToday">0</div>
+                            <div class="stat-label">Órdenes Hoy</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number" id="inProgress">0</div>
+                            <div class="stat-label">En Progreso</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number" id="completedToday">0</div>
+                            <div class="stat-label">Completadas Hoy</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number" id="pendingApproval">0</div>
+                            <div class="stat-label">Pendientes de Aprobación</div>
+                        </div>
+                    </div>
+
+                    <div class="dashboard-grid">
+                        <div class="dashboard-card">
+                            <h3>Mis Asignaciones Actuales</h3>
+                            <div id="currentAssignments" class="assignment-list">
+                                <p class="empty-state">No hay asignaciones</p>
+                            </div>
+                        </div>
+
+                        <div class="dashboard-card">
+                            <h3>Próximas Citas en el Taller</h3>
+                            <div id="upcomingAppointments" class="appointment-list">
+                                <p class="empty-state">No hay citas</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Asignaciones -->
+                <section id="assignments-section" class="section">
+                    <h1>Mis Asignaciones</h1>
+
+                    <div class="filter-bar">
+                        <select id="filterAssignment" onchange="filterAssignments()">
+                            <option value="">Todos</option>
+                            <option value="pendiente">Pendiente</option>
+                            <option value="en-progreso">En Progreso</option>
+                            <option value="completado">Completado</option>
+                        </select>
+                    </div>
+
+                    <div id="assignmentsList" class="assignments-table">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>ID Asignación</th>
+                                    <th>Orden</th>
+                                    <th>Vehículo</th>
+                                    <th>Tarea</th>
+                                    <th>Fecha Asignada</th>
+                                    <th>Estado</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody id="assignmentsTableBody">
+                                <tr><td colspan="7" class="empty-state">No hay asignaciones</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <!-- Ordenes -->
+                <section id="orders-section" class="section">
+                    <h1>Órdenes de Trabajo</h1>
+
+                    <div class="filter-bar">
+                        <select id="filterOrderStatus" onchange="filterOrders()">
+                            <option value="">Todos los estados</option>
+                            <option value="recibida">Recibida</option>
+                            <option value="diagnostico">En Diagnóstico</option>
+                            <option value="reparacion">En Reparación</option>
+                            <option value="pruebas">En Pruebas</option>
+                            <option value="completada">Completada</option>
+                        </select>
+                    </div>
+
+                    <div id="ordersList" class="orders-grid">
+                        <p class="empty-state">No hay órdenes</p>
+                    </div>
+                </section>
+
+                <!-- Horario -->
+                <section id="schedule-section" class="section">
+                    <h1>Mi Horario</h1>
+
+                    <div id="scheduleCalendar" class="calendar-view">
+                        <div id="calendarContainer"></div>
+                    </div>
+
+                    <div id="scheduleDetails" class="schedule-details">
+                        <h3>Detalles del Día</h3>
+                        <div id="dayDetails">
+                            <p class="empty-state">Selecciona un día para ver detalles</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Inventario -->
+                <section id="inventory-section" class="section">
+                    <h1>Inventario Disponible</h1>
+
+                    <div class="filter-bar">
+                        <input type="text" id="searchInventory" placeholder="Buscar componente..." onkeyup="searchInventory()">
+                    </div>
+
+                    <div id="inventoryList" class="inventory-table">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Componente</th>
+                                    <th>Código</th>
+                                    <th>Stock Disponible</th>
+                                    <th>Unidad</th>
+                                    <th>Precio Unitario</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody id="inventoryTableBody">
+                                <tr><td colspan="6" class="empty-state">No hay inventario</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <!-- Solicitud de matriales -->
+                <section id="requests-section" class="section">
+                    <div class="section-header">
+                        <h1>Solicitudes de Materiales</h1>
+                        <button class="btn btn-primary" onclick="openRequestForm()">+ Nueva Solicitud</button>
+                    </div>
+
+                    <div id="requestsList" class="requests-table">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>ID Solicitud</th>
+                                    <th>Componente</th>
+                                    <th>Cantidad</th>
+                                    <th>Fecha Solicitud</th>
+                                    <th>Estado</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody id="requestsTableBody">
+                                <tr><td colspan="6" class="empty-state">No hay solicitudes</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <!-- Perfil -->
+                <section id="profile-section" class="section">
+                    <h1>Mi Perfil</h1>
+
+                    <form id="profileForm" class="form-grid" onsubmit="updateProfile(event)">
+                        <div class="form-group">
+                            <label>Nombre Completo</label>
+                            <input type="text" id="profileName" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Correo</label>
+                            <input type="email" id="profileEmail" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Teléfono</label>
+                            <input type="tel" id="profilePhone">
+                        </div>
+                        <div class="form-group">
+                            <label>Especialidad</label>
+                            <select id="profileSpecialty">
+                                <option>Mecánica General</option>
+                                <option>Electricidad Automotriz</option>
+                                <option>Transmisiones</option>
+                                <option>Suspensión y Frenos</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Contraseña Nueva (opcional)</label>
+                            <input type="password" id="profilePassword">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+                    </form>
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <!-- MODALS -->
+    <div id="orderDetailsModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal('orderDetailsModal')">&times;</span>
+            <h2>Detalles de Orden</h2>
+            <div id="orderDetailsContent"></div>
+        </div>
+    </div>
+
+    <div id="requestModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal('requestModal')">&times;</span>
+            <h2>Nueva Solicitud de Materiales</h2>
+            <form onsubmit="saveMaterialRequest(event)">
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label>Componente</label>
+                        <select id="requestComponent" required>
+                            <option>Selecciona un componente...</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Cantidad Requerida</label>
+                        <input type="number" id="requestQuantity" min="1" required>
+                    </div>
+                    <div class="form-group full">
+                        <label>Justificación</label>
+                        <textarea id="requestJustification" rows="4"></textarea>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary">Enviar Solicitud</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="js/config.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/worker-dashboard.js"></script>
+</body>
+</html>
+

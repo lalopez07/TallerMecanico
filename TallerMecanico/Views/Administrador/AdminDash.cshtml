@@ -1,0 +1,502 @@
+﻿
+@{
+    ViewBag.Title = "AdminDash";
+}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard Administrador - MotorLink</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href='@Url.Content("~/Content/styles.css")' rel="stylesheet" type="text/css" />
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- BAR -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h2>motorlink</h2>
+            </div>
+            <nav class="sidebar-nav" id="sidebarNav">
+                <a href="#" class="nav-item active" onclick="loadSection('dashboard')">
+                    <span>Menú</span>
+                </a>
+                <a href="#" class="nav-item" onclick="loadSection('orders')">
+                    <span>Órdenes</span>
+                </a>
+                <a href="#" class="nav-item" onclick="loadSection('clients')">
+                    <span>Clientes</span>
+                </a>
+                <a href="#" class="nav-item" onclick="loadSection('employees')">
+                    <span>Empleados</span>
+                </a>
+                <a href="#" class="nav-item" onclick="loadSection('inventory')">
+                    <span>Inventario</span>
+                </a>
+                <a href="#" class="nav-item" onclick="loadSection('services')">
+                    <span>Servicios</span>
+                </a>
+                <a href="#" class="nav-item" onclick="loadSection('schedule')">
+
+                    <span>Horarios</span>
+                </a>
+                <a href="#" class="nav-item" onclick="loadSection('reports')">
+                    <span>Reportes</span>
+                </a>
+                <a href="#" class="nav-item" onclick="loadSection('settings')">
+                    <span>Configuración</span>
+                </a>
+                <hr>
+                <a href="#" class="nav-item" onclick="loadSection('profile')">
+                    <span>Mi Perfil</span>
+                </a>
+                <a href="login.html" class="nav-item" onclick="handleLogout()">
+                    <span>Cerrar Sesión</span>
+                </a>
+            </nav>
+        </aside>
+
+        <!-- MAIN-->
+        <main class="main-content">
+            <!-- TOP NAV -->
+            <header class="top-nav">
+                <div class="search-bar">
+                    <input type="text" placeholder="Buscar...">
+                </div>
+                <div class="nav-right">
+                    <button class="icon-btn">🔔</button>
+                    <button class="icon-btn">⚙️</button>
+                    <div class="user-profile">
+                        <img src="https://via.placeholder.com/40" alt="Usuario">
+                        <span id="userName">Administrador</span>
+                    </div>
+                </div>
+            </header>
+
+            <div class="content-area" id="contentArea">
+                <!-- Dashboard  -->
+                <section id="dashboard-section" class="section active">
+                    <h1>Dashboard Administrativo</h1>
+
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-number" id="totalClients">0</div>
+                            <div class="stat-label">Clientes Totales</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number" id="activeOrders">0</div>
+                            <div class="stat-label">Órdenes Activas</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number" id="revenue">$0</div>
+                            <div class="stat-label">Ingresos Hoy</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number" id="employees">0</div>
+                            <div class="stat-label">Empleados Activos</div>
+                        </div>
+                    </div>
+
+                    <div class="dashboard-grid">
+                        <div class="dashboard-card">
+                            <h3>Órdenes Recientes</h3>
+                            <div id="recentOrders" class="order-list">
+                                <p class="empty-state">No hay órdenes</p>
+                            </div>
+                        </div>
+
+                        <div class="dashboard-card">
+                            <h3>Ingresos Este Mes</h3>
+                            <canvas id="revenueChart"></canvas>
+                        </div>
+
+                        <div class="dashboard-card">
+                            <h3>Servicios Más Solicitados</h3>
+                            <div id="topServices">
+                                <p class="empty-state">No hay datos</p>
+                            </div>
+                        </div>
+
+                        <div class="dashboard-card">
+                            <h3>Ocupación de Empleados</h3>
+                            <canvas id="employeeChart"></canvas>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Ordenes -->
+                <section id="orders-section" class="section">
+                    <div class="section-header">
+                        <h1>Gestión de Órdenes</h1>
+                        <button class="btn btn-primary" onclick="openOrderForm()">+ Nueva Orden</button>
+                    </div>
+
+                    <div class="filter-bar">
+                        <select id="filterOrderStatus" onchange="filterOrders()">
+                            <option value="">Todos los estados</option>
+                            <option value="pendiente">Pendiente</option>
+                            <option value="en-progreso">En Progreso</option>
+                            <option value="completado">Completado</option>
+                            <option value="cancelado">Cancelado</option>
+                        </select>
+                        <input type="date" id="filterOrderDate" onchange="filterOrders()">
+                    </div>
+
+                    <div id="ordersList" class="orders-table">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>ID Orden</th>
+                                    <th>Cliente</th>
+                                    <th>Vehículo</th>
+                                    <th>Servicio</th>
+                                    <th>Fecha</th>
+                                    <th>Estado</th>
+                                    <th>Monto</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody id="ordersTableBody">
+                                <tr><td colspan="8" class="empty-state">No hay órdenes</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <!-- area de clientes -->
+                <section id="clients-section" class="section">
+                    <div class="section-header">
+                        <h1>Gestión de Clientes</h1>
+                        <button class="btn btn-primary" onclick="openClientForm()">+ Nuevo Cliente</button>
+                    </div>
+
+                    <div class="filter-bar">
+                        <input type="text" id="searchClient" placeholder="Buscar cliente..." onkeyup="searchClients()">
+                    </div>
+
+                    <div id="clientsList" class="clients-table">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Nombre</th>
+                                    <th>Email</th>
+                                    <th>Teléfono</th>
+                                    <th>Vehículos</th>
+                                    <th>Órdenes Totales</th>
+                                    <th>Estado</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody id="clientsTableBody">
+                                <tr><td colspan="7" class="empty-state">No hay clientes</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <!-- Seccion de empleados -->
+                <section id="employees-section" class="section">
+                    <div class="section-header">
+                        <h1>Gestión de Empleados</h1>
+                        <button class="btn btn-primary" onclick="openEmployeeForm()">+ Nuevo Empleado</button>
+                    </div>
+
+                    <div id="employeesList" class="employees-grid">
+                        <p class="empty-state">No hay empleados</p>
+                    </div>
+                </section>
+
+                <!-- Inventario -->
+                <section id="inventory-section" class="section">
+                    <div class="section-header">
+                        <h1>Gestión de Inventario</h1>
+                        <button class="btn btn-primary" onclick="openInventoryForm()">+ Agregar Componente</button>
+                    </div>
+
+                    <div class="filter-bar">
+                        <input type="text" id="searchInventory" placeholder="Buscar componente..." onkeyup="searchInventory()">
+                    </div>
+
+                    <div id="inventoryList" class="inventory-table">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Componente</th>
+                                    <th>Código</th>
+                                    <th>Stock Actual</th>
+                                    <th>Stock Mínimo</th>
+                                    <th>Precio Unitario</th>
+                                    <th>Proveedor</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody id="inventoryTableBody">
+                                <tr><td colspan="7" class="empty-state">No hay componentes</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <!-- Servicios-->
+                <section id="services-section" class="section">
+                    <div class="section-header">
+                        <h1>Gestión de Servicios</h1>
+                        <button class="btn btn-primary" onclick="openServiceForm()">+ Nuevo Servicio</button>
+                    </div>
+
+                    <div id="servicesList" class="services-grid">
+                        <p class="empty-state">No hay servicios</p>
+                    </div>
+                </section>
+
+                <!-- horario+ -->
+                <section id="schedule-section" class="section">
+                    <h1>Gestión de Horarios</h1>
+
+                    <div class="filter-bar">
+                        <select id="filterEmployee" onchange="loadSchedule()">
+                            <option value="">Todos los empleados</option>
+                        </select>
+                    </div>
+
+                    <div id="scheduleView" class="schedule-view"></div>
+                </section>
+
+                <!-- Reportes -->
+                <section id="reports-section" class="section">
+                    <h1>Reportes y Análisis</h1>
+
+                    <div class="reports-grid">
+                        <div class="report-card">
+                            <h3>Reporte de Ingresos</h3>
+                            <div class="filter-bar">
+                                <input type="month" id="revenueMonth" onchange="generateRevenueReport()">
+                            </div>
+                            <canvas id="revenueReportChart"></canvas>
+                            <button class="btn btn-secondary" onclick="exportReport('revenue')">Descargar PDF</button>
+                        </div>
+
+                        <div class="report-card">
+                            <h3>Reporte de Servicios</h3>
+                            <canvas id="servicesReportChart"></canvas>
+                            <button class="btn btn-secondary" onclick="exportReport('services')">Descargar PDF</button>
+                        </div>
+
+                        <div class="report-card">
+                            <h3>Reporte de Clientes</h3>
+                            <canvas id="clientsReportChart"></canvas>
+                            <button class="btn btn-secondary" onclick="exportReport('clients')">Descargar PDF</button>
+                        </div>
+
+                        <div class="report-card">
+                            <h3>Reporte de Desempeño de Empleados</h3>
+                            <div id="employeePerformance"></div>
+                            <button class="btn btn-secondary" onclick="exportReport('employees')">Descargar PDF</button>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Configuracion -->
+                <section id="settings-section" class="section">
+                    <h1>Configuración del Sistema</h1>
+
+                    <form id="settingsForm" class="form-grid" onsubmit="saveSettings(event)">
+                        <div class="form-group">
+                            <label>Nombre del Taller</label>
+                            <input type="text" id="shopName" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Email de Contacto</label>
+                            <input type="email" id="shopEmail" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Teléfono</label>
+                            <input type="tel" id="shopPhone" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Dirección</label>
+                            <input type="text" id="shopAddress">
+                        </div>
+                        <div class="form-group">
+                            <label>Horario de Apertura</label>
+                            <input type="time" id="openingTime">
+                        </div>
+                        <div class="form-group">
+                            <label>Horario de Cierre</label>
+                            <input type="time" id="closingTime">
+                        </div>
+                        <div class="form-group full">
+                            <label>Moneda</label>
+                            <select id="currency">
+                                <option>MXN - Peso Mexicano</option>
+                                <option>USD - Dólar Estadounidense</option>
+                                <option>EUR - Euro</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Guardar Configuración</button>
+                    </form>
+                </section>
+
+                <!-- perfil -->
+                <section id="profile-section" class="section">
+                    <h1>Mi Perfil</h1>
+
+                    <form id="profileForm" class="form-grid" onsubmit="updateProfile(event)">
+                        <div class="form-group">
+                            <label>Nombre Completo</label>
+                            <input type="text" id="profileName" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Correo</label>
+                            <input type="email" id="profileEmail" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Teléfono</label>
+                            <input type="tel" id="profilePhone">
+                        </div>
+                        <div class="form-group">
+                            <label>Contraseña Nueva (opcional)</label>
+                            <input type="password" id="profilePassword">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+                    </form>
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <!-- MODALS -->
+    <div id="orderModal" class="modal">
+        <div class="modal-content modal-lg">
+            <span class="close-modal" onclick="closeModal('orderModal')">&times;</span>
+            <h2>Nueva Orden de Servicio</h2>
+            <form onsubmit="saveOrder(event)">
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label>Cliente</label>
+                        <select id="orderClient" required>
+                            <option>Selecciona un cliente...</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Vehículo</label>
+                        <select id="orderVehicle" required>
+                            <option>Selecciona un vehículo...</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Servicio</label>
+                        <select id="orderService" required>
+                            <option>Selecciona un servicio...</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Monto Estimado</label>
+                        <input type="number" id="orderAmount" step="0.01">
+                    </div>
+                    <div class="form-group">
+                        <label>Asignado a</label>
+                        <select id="orderAssignee">
+                            <option>Selecciona un empleado...</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Fecha Tentativa</label>
+                        <input type="date" id="orderDate">
+                    </div>
+                    <div class="form-group full">
+                        <label>Descripción</label>
+                        <textarea id="orderDescription" rows="4"></textarea>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary">Crear Orden</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="clientModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal('clientModal')">&times;</span>
+            <h2>Nuevo Cliente</h2>
+            <form onsubmit="saveClient(event)">
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label>Nombre</label>
+                        <input type="text" id="clientName" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input type="email" id="clientEmail" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Teléfono</label>
+                        <input type="tel" id="clientPhone">
+                    </div>
+                    <div class="form-group">
+                        <label>Dirección</label>
+                        <input type="text" id="clientAddress">
+                    </div>
+                    <div class="form-group">
+                        <label>Ciudad</label>
+                        <input type="text" id="clientCity">
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary">Guardar Cliente</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="employeeModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal('employeeModal')">&times;</span>
+            <h2>Nuevo Empleado</h2>
+            <form onsubmit="saveEmployee(event)">
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label>Nombre</label>
+                        <input type="text" id="employeeName" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input type="email" id="employeeEmail" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Teléfono</label>
+                        <input type="tel" id="employeePhone">
+                    </div>
+                    <div class="form-group">
+                        <label>Especialidad</label>
+                        <select id="employeeSpecialty">
+                            <option>Mecánica General</option>
+                            <option>Electricidad Automotriz</option>
+                            <option>Transmisiones</option>
+                            <option>Suspensión y Frenos</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Salario Base</label>
+                        <input type="number" id="employeeSalary" step="0.01">
+                    </div>
+                    <div class="form-group">
+                        <label>Rol</label>
+                        <select id="employeeRole">
+                            <option>Técnico</option>
+                            <option>Supervisor</option>
+                            <option>Recepcionista</option>
+                        </select>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary">Guardar Empleado</button>
+            </form>
+        </div>
+    </div>
+
+    <script src='@Url.Content("~/Scripts/config.js")'></script>
+    <script src='@Url.Content("~/Scripts/auth.js")'></script>
+    <script src='@Url.Content("~/Scripts/app.js")'></script>
+    <script src='@Url.Content("~/Scripts/admin-dashboard.js")'></script>
+</body>
+</html>
+
+

@@ -89,11 +89,13 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\Site.css" />
+    <Content Include="Content\styles.css" />
     <Content Include="Global.asax" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AdministradorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -109,6 +111,10 @@
     <Content Include="Views\Home\Inventario.cshtml" />
     <Content Include="Views\Home\Ordenes.cshtml" />
     <Content Include="Views\Home\Pagos.cshtml" />
+    <Content Include="Views\Administrador\Index.cshtml" />
+    <Content Include="Views\Administrador\AdminDash.cshtml" />
+    <Content Include="Views\Administrador\Trabajdash.cshtml" />
+    <Content Include="Views\Administrador\cliendash.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
