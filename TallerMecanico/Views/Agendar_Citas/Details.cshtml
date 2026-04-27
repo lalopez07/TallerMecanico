@@ -1,0 +1,122 @@
+﻿@model TallerMecanico.Models.Agendar_Citas
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Agendar_Citas</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.fecha_cita)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.fecha_cita)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.hora_cita)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.hora_cita)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.estado)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.estado)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.motivo_cancelacion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.motivo_cancelacion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ledger_start_transaction_id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ledger_start_transaction_id)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ledger_end_transaction_id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ledger_end_transaction_id)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ledger_start_sequence_number)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ledger_start_sequence_number)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ledger_end_sequence_number)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ledger_end_sequence_number)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Agendar_Citas2.estado)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Agendar_Citas2.estado)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Clientes.nombre_completo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Clientes.nombre_completo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Cotizaciones.descripcion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Cotizaciones.descripcion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Trabajadores.nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Trabajadores.nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Registro_Vehiculos.marca)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Registro_Vehiculos.marca)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.id_cita }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

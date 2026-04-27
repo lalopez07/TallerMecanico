@@ -1,0 +1,105 @@
+﻿@model IEnumerable<TallerMecanico.Models.Agendar_Citas>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.fecha_cita)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.hora_cita)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.estado)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.motivo_cancelacion)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ledger_start_transaction_id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ledger_end_transaction_id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ledger_start_sequence_number)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ledger_end_sequence_number)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Agendar_Citas2.estado)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Clientes.nombre_completo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Cotizaciones.descripcion)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Trabajadores.nombre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Registro_Vehiculos.marca)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.fecha_cita)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.hora_cita)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.estado)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.motivo_cancelacion)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ledger_start_transaction_id)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ledger_end_transaction_id)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ledger_start_sequence_number)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ledger_end_sequence_number)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Agendar_Citas2.estado)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Clientes.nombre_completo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Cotizaciones.descripcion)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Trabajadores.nombre)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Registro_Vehiculos.marca)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.id_cita }) |
+            @Html.ActionLink("Details", "Details", new { id=item.id_cita }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.id_cita })
+        </td>
+    </tr>
+}
+
+</table>

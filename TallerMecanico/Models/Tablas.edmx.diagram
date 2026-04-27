@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="8a88bd6328814b88a18695d1cb7d54d5" Name="Diagram1">
+        <EntityTypeShape EntityType="tallermecanicoModel.Administradores" Width="1.5" PointX="6" PointY="25.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="tallermecanicoModel.Agendar_Citas" Width="1.5" PointX="5.25" PointY="30.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="tallermecanicoModel.Auditorias" Width="1.5" PointX="3" PointY="24.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="tallermecanicoModel.Catalogo_Vehiculos" Width="1.5" PointX="9" PointY="24.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="tallermecanicoModel.Clientes" Width="1.5" PointX="3" PointY="28.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="tallermecanicoModel.Cotizaciones" Width="1.5" PointX="8.25" PointY="28.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="tallermecanicoModel.Detalles_Inventario" Width="1.5" PointX="15.75" PointY="24" IsExpanded="true" />
+        <EntityTypeShape EntityType="tallermecanicoModel.Detalles_Servicios" Width="1.5" PointX="18.75" PointY="24" IsExpanded="true" />
+        <EntityTypeShape EntityType="tallermecanicoModel.Errores" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="tallermecanicoModel.estados" Width="1.5" PointX="1.5" PointY="10.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="tallermecanicoModel.Horarios_Trabajadores" Width="1.5" PointX="5.25" PointY="17.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="tallermecanicoModel.Inventario" Width="1.5" PointX="13.5" PointY="16.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="tallermecanicoModel.Menu_Servicios" Width="1.5" PointX="16.5" PointY="14" IsExpanded="true" />
+        <EntityTypeShape EntityType="tallermecanicoModel.municipios" Width="1.5" PointX="1.5" PointY="14.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="tallermecanicoModel.Notificaciones" Width="1.5" PointX="3" PointY="33.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="tallermecanicoModel.Ordenes_Trabajos" Width="1.5" PointX="13.5" PointY="22.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="tallermecanicoModel.Pagos" Width="1.5" PointX="15.75" PointY="31.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="tallermecanicoModel.pais" Width="1.5" PointX="1.5" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="tallermecanicoModel.Proveedores" Width="1.5" PointX="11.25" PointY="15.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="tallermecanicoModel.Registro_Vehiculos" Width="1.5" PointX="11.25" PointY="28.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="tallermecanicoModel.Reportes" Width="1.5" PointX="5.25" PointY="21.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="tallermecanicoModel.Servicios_Domicilio" Width="1.5" PointX="15.75" PointY="18.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="tallermecanicoModel.Sesiones" Width="1.5" PointX="0.75" PointY="24.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="tallermecanicoModel.sucursales" Width="1.5" PointX="0.75" PointY="19.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="tallermecanicoModel.Trabajadores" Width="1.5" PointX="3" PointY="18.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="tallermecanicoModel.Unidades_de_Medida" Width="1.5" PointX="11.25" PointY="19.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="tallermecanicoModel.v_citas" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="tallermecanicoModel.v_ordenes_trabajo" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="tallermecanicoModel.v_pagos" Width="1.5" PointX="6.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="tallermecanicoModel.v_trabajadores" Width="1.5" PointX="3.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="tallermecanicoModel.v_trabajadoresactivos" Width="1.5" PointX="6.75" PointY="4.75" IsExpanded="true" />
+        <AssociationConnector Association="tallermecanicoModel.fk_admin_login" ManuallyRouted="false" />
+        <AssociationConnector Association="tallermecanicoModel.fk_admin_sucursal" ManuallyRouted="false" />
+        <AssociationConnector Association="tallermecanicoModel.fk_cita_anterior" ManuallyRouted="false" />
+        <AssociationConnector Association="tallermecanicoModel.fk_cita_cliente" ManuallyRouted="false" />
+        <AssociationConnector Association="tallermecanicoModel.fk_cita_cotizacion" ManuallyRouted="false" />
+        <AssociationConnector Association="tallermecanicoModel.fk_cita_trabajador" ManuallyRouted="false" />
+        <AssociationConnector Association="tallermecanicoModel.fk_cita_vehiculo" ManuallyRouted="false" />
+        <AssociationConnector Association="tallermecanicoModel.fk_auditoria_usuario" ManuallyRouted="false" />
+        <AssociationConnector Association="tallermecanicoModel.fk_vehiculo_catalogo" ManuallyRouted="false" />
+        <AssociationConnector Association="tallermecanicoModel.fk_cliente_login" ManuallyRouted="false" />
+        <AssociationConnector Association="tallermecanicoModel.fk_cotizacion_cliente" ManuallyRouted="false" />
+        <AssociationConnector Association="tallermecanicoModel.fk_domicilio_cliente" ManuallyRouted="false" />
+        <AssociationConnector Association="tallermecanicoModel.fk_orden_cliente" ManuallyRouted="false" />
+        <AssociationConnector Association="tallermecanicoModel.fk_vehiculo_cliente" ManuallyRouted="false" />
+        <AssociationConnector Association="tallermecanicoModel.fk_cotizacion_aprobada" ManuallyRouted="false" />
+        <AssociationConnector Association="tallermecanicoModel.fk_cotizacion_orden" ManuallyRouted="false" />
+        <AssociationConnector Association="tallermecanicoModel.fk_cotizacion_vehiculo" ManuallyRouted="false" />
+        <AssociationConnector Association="tallermecanicoModel.fk_orden_cotizacion" ManuallyRouted="false" />
+        <AssociationConnector Association="tallermecanicoModel.fk_detalle_inv_inventario" ManuallyRouted="false" />
+        <AssociationConnector Association="tallermecanicoModel.fk_detalle_inv_orden" ManuallyRouted="false" />
+        <AssociationConnector Association="tallermecanicoModel.fk_detalle_orden" ManuallyRouted="false" />
+        <AssociationConnector Association="tallermecanicoModel.fk_detalle_servicio" ManuallyRouted="false" />
+        <AssociationConnector Association="tallermecanicoModel.fk_estado_pais" ManuallyRouted="false" />
+        <AssociationConnector Association="tallermecanicoModel.fk_municipio_estado" ManuallyRouted="false" />
+        <AssociationConnector Association="tallermecanicoModel.fk_horario_trabajador" ManuallyRouted="false" />
+        <AssociationConnector Association="tallermecanicoModel.fk_inventario_proveedor" ManuallyRouted="false" />
+        <AssociationConnector Association="tallermecanicoModel.fk_unidades_de_medida" ManuallyRouted="false" />
+        <AssociationConnector Association="tallermecanicoModel.fk_id_municipio" ManuallyRouted="false" />
+        <AssociationConnector Association="tallermecanicoModel.fk_notificacion_usuario" ManuallyRouted="false" />
+        <AssociationConnector Association="tallermecanicoModel.fk_domicilio_orden" ManuallyRouted="false" />
+        <AssociationConnector Association="tallermecanicoModel.fk_orden_empleado" ManuallyRouted="false" />
+        <AssociationConnector Association="tallermecanicoModel.fk_orden_vehiculo" ManuallyRouted="false" />
+        <AssociationConnector Association="tallermecanicoModel.fk_pago_orden" ManuallyRouted="false" />
+        <AssociationConnector Association="tallermecanicoModel.fk_reporte_trabajador" ManuallyRouted="false" />
+        <AssociationConnector Association="tallermecanicoModel.fk_domicilio_trabajador" ManuallyRouted="false" />
+        <AssociationConnector Association="tallermecanicoModel.fk_trabajador_sesion" ManuallyRouted="false" />
+        <AssociationConnector Association="tallermecanicoModel.fk_trabajador_sucursal" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
